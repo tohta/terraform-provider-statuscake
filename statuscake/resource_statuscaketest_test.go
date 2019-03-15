@@ -190,7 +190,7 @@ func testAccTestCheckAttributes(rn string, test *statuscake.Test) resource.TestC
 			case "status_codes":
 				err = check(key, value, test.StatusCodes)
 			case "validate_ssl":
-				err = check(key, value, strconv.Itoa(test.EnableSSLWarning))
+				err = check(key, value, strconv.FormatBool(test.EnableSSLWarning))
 			case "use_jar":
 				err = check(key, value, strconv.Itoa(test.UseJar))
 			case "post_raw":
