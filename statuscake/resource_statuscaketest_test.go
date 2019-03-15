@@ -92,6 +92,7 @@ func TestAccStatusCake_withUpdate(t *testing.T) {
 					resource.TestCheckResourceAttr("statuscake_test.google", "real_browser", "1"),
 					resource.TestCheckResourceAttr("statuscake_test.google", "test_tags.#", "1"),
 					resource.TestCheckResourceAttr("statuscake_test.google", "status_codes", "string23065"),
+					resource.TestCheckResourceAttr("statuscake_test.google", "validate_ssl", "true"),
 					resource.TestCheckResourceAttr("statuscake_test.google", "use_jar", "1"),
 					resource.TestCheckResourceAttr("statuscake_test.google", "post_raw", "string32096"),
 					resource.TestCheckResourceAttr("statuscake_test.google", "final_endpoint", "string10781"),
@@ -188,6 +189,8 @@ func testAccTestCheckAttributes(rn string, test *statuscake.Test) resource.TestC
 				err = check(key, value, strconv.FormatBool(test.DoNotFind))
 			case "status_codes":
 				err = check(key, value, test.StatusCodes)
+			case "validate_ssl":
+				err = check(key, value, strconv.Itoa(test.EnableSSLWarning))
 			case "use_jar":
 				err = check(key, value, strconv.Itoa(test.UseJar))
 			case "post_raw":
@@ -264,6 +267,7 @@ resource "statuscake_test" "google" {
 	real_browser = 1
 	test_tags = ["string8191"]
 	status_codes = "string23065"
+	validate_ssl = true
 	use_jar = 1
 	post_raw = "string32096"
 	final_endpoint = "string10781"
